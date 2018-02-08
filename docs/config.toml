@@ -1,0 +1,38 @@
+#
+# config.toml
+#
+baseURL = "https://fout.github.io/RFP-iOS-SDK/"
+title = "RFP-iOS-SDK Docs"
+theme = "hugo-theme-learn"
+#googleAnalytics = "UA-0000000-0"
+languageCode = "ja"
+DefaultContentLanguage = "ja"
+defaultContenLanguageInSubdir = "true"
+hasCJKLanguage = "true"
+
+home = ["HTML"]
+
+[params]
+themeVariant = "blue"
+
+[Languages]
+[Languages.ja]
+weight = 1
+languageName = "日本語"
+
+[Languages.en]
+weight = 2
+languageName = "English"
+
+[[Languages.ja.menu.shortcuts]]
+name = "<i class='fa fa-fw fa-github'></i> Github repo"
+identifier = "ds"
+url = "https://github.com/fout/RFP-iOS-SDK"
+weight = 10
+
+[[Languages.en.menu.shortcuts]]
+name = "<i class='fa fa-fw fa-github'></i> Github repo"
+identifier = "ds"
+url = "https://github.com/fout/RFP-iOS-SDK"
+weight = 10
+
