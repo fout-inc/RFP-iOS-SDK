@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="https://fout.github.io/RFP-iOS-SDK//images/favicon.png" type="image/x-icon" />
 <link rel="icon" href="https://fout.github.io/RFP-iOS-SDK//images/favicon.png" type="image/x-icon" />
 
-    <title>FAQ :: RFP-iOS-SDK Docs</title>
+    <title>Set HTTP request timeout interval :: RFP-iOS-SDK Docs</title>
     
     
     <link href="/RFP-iOS-SDK/css/nucleus.css?1530071074" rel="stylesheet">
@@ -35,7 +35,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/RFP-iOS-SDK/en/faq/">
+  <body class="" data-url="/RFP-iOS-SDK/en/programming-guide/2_6/">
     <nav id="sidebar" class="">
 
 
@@ -100,7 +100,7 @@
   
     
     <li data-nav-id="/RFP-iOS-SDK/en/programming-guide/" title="Programming Guide" class="dd-item 
-        
+        parent
         
         
         ">
@@ -219,7 +219,7 @@
  
   
     
-      <li data-nav-id="/RFP-iOS-SDK/en/programming-guide/2_6/" title="Set HTTP request timeout interval" class="dd-item ">
+      <li data-nav-id="/RFP-iOS-SDK/en/programming-guide/2_6/" title="Set HTTP request timeout interval" class="dd-item active">
         <a href="/RFP-iOS-SDK/en/programming-guide/2_6/">
         Set HTTP request timeout interval
         
@@ -246,8 +246,8 @@
   
     
     <li data-nav-id="/RFP-iOS-SDK/en/faq/" title="FAQ" class="dd-item 
-        parent
-        active
+        
+        
         
         ">
       <a href="/RFP-iOS-SDK/en/faq/">
@@ -318,7 +318,7 @@
                   
                     
                     
-                      <option id="ja" value="/RFP-iOS-SDK/faq/">日本語</option>
+                      <option id="ja" value="/RFP-iOS-SDK/programming-guide/2_6/">日本語</option>
                     
                   
               
@@ -332,7 +332,7 @@
                   
                     
                     
-                      <option id="en" value="/RFP-iOS-SDK/en/faq/" selected>English</option>
+                      <option id="en" value="/RFP-iOS-SDK/en/programming-guide/2_6/" selected>English</option>
                     
                   
               
@@ -393,7 +393,13 @@
             
           
           
-            <a href='/RFP-iOS-SDK/en/'>TOP</a> > FAQ
+            
+            
+          
+          
+            <a href='/RFP-iOS-SDK/en/'>TOP</a> > <a href='/RFP-iOS-SDK/en/programming-guide/'>Programming Guide</a> > Set HTTP request timeout interval
+          
+         
           
          
           
@@ -407,9 +413,13 @@
 <ul>
 <li>
 <ul>
-<li><a href="#inquiry-point">Inquiry point</a></li>
-<li><a href="#what-kind-of-information-is-acquired-from-the-terminal">What kind of information is acquired from the terminal?</a></li>
-<li><a href="#what-is-the-meaning-of-the-version-number">What is the meaning of the version number?</a></li>
+<li>
+<ul>
+<li><a href="#set-http-request-timeout-interval">Set HTTP request timeout interval</a>
+<ul>
+<li><a href="#points-to-note-when-setting-the-timeout-interval">Points to note when setting the timeout interval</a></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -424,7 +434,7 @@
         
         <div id="body-inner">
           
-            <h1>FAQ</h1>
+            <h1>Set HTTP request timeout interval</h1>
           
 
         
@@ -433,85 +443,43 @@
 
 
 <ul>
-<li><a href="#howto">Inquiry point</a></li>
-<li><a href="#info">What kind of information is acquired from the terminal？</a></li>
-<li><a href="#version">What is the meaning of the version number？</a></li>
+<li><a href="#timeout">Set HTTP request timeout interval</a></li>
 </ul>
 
-<p><a name="howto"></a></p>
+<p><a name="timeout"></a></p>
 
-<h2 id="inquiry-point">Inquiry point</h2>
+<h3 id="set-http-request-timeout-interval">Set HTTP request timeout interval</h3>
+
+<p>(<strong>Can be used on v2.6.0 or later</strong>)</p>
+
+<p>Your app can use the <code>rfpSetHttpRequestTimeoutInterval:</code> to set HTTP request&rsquo;s timeout interval in RFP.</p>
+
+<pre><code class="language-objc">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    // ※Be sure to set the rfpSetHttpRequestTimeoutInterval before rfpInitMedia
+    [RFP rfpSetHttpRequestTimeoutInterval:15.0f];  //set HTTP request interval to 15s
+
+    [RFP rfpInitMedia:@&quot;your_media_id&quot;];
+
+    // Acquire current setting value
+    CGFloat timeoutInterval = [RFP rfpGetHttpRequestTimeoutInterval];
+    // ...
+}
+</code></pre>
+
+<h4 id="points-to-note-when-setting-the-timeout-interval">Points to note when setting the timeout interval</h4>
 
 <ul>
-<li>Please direct inquiries to the representative</li>
+<li><p>A very short interval could lead to failed to get ads. Please set the value according to the situation.</p></li>
+
+<li><p>If you set an interval longer than the timeout interval of the server, it follows the timeout of the server.</p></li>
 </ul>
-
-<p><a name="info"></a></p>
-
-<h2 id="what-kind-of-information-is-acquired-from-the-terminal">What kind of information is acquired from the terminal?</h2>
-
-<ul>
-<li>Acquires the following information</li>
-</ul>
-
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>API</th>
-<th>Details</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>IDFA</td>
-<td><code>ASIdentifierManager advertisingIdentifier</code></td>
-<td>Do not acquire when user is setting optput</td>
-</tr>
-
-<tr>
-<td>OS</td>
-<td><code>UIDevice systemName</code></td>
-<td><code>iPhone OS</code> etc.</td>
-</tr>
-
-<tr>
-<td>OS version</td>
-<td><code>UIDevice systemVersion</code></td>
-<td><code>5.0.1</code>, <code>7.1</code> etc.</td>
-</tr>
-
-<tr>
-<td>Terminal name</td>
-<td><code>utsname machine</code></td>
-<td><code>iPhone4,1</code>, <code>iPhone7,1</code> etc.</td>
-</tr>
-
-<tr>
-<td>Language settings</td>
-<td><code>NSLocale preferredLanguages [0]</code></td>
-<td><code>ja</code>, <code>en</code> etc.</td>
-</tr>
-
-<tr>
-<td>Country code</td>
-<td><code>NSLocale NSLocaleCountryCode</code></td>
-<td><code>JP</code>, <code>US</code> etc.</td>
-</tr>
-</tbody>
-</table>
-
-<p><a name="version"></a></p>
-
-<h2 id="what-is-the-meaning-of-the-version-number">What is the meaning of the version number?</h2>
-
-<p>Follow <a href="http://semver.org/">semver</a></p>
 
 
 <footer class=" footline" >
 	
 </footer>
+
 
         
         </div> 
@@ -563,6 +531,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -570,6 +539,25 @@
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -640,6 +628,29 @@
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
                 
                 
 
@@ -669,54 +680,15 @@
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
         
         
 
 
         
-            <a class="nav nav-prev" href="/RFP-iOS-SDK/en/programming-guide/2_6/" title="Set HTTP request timeout interval"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="/RFP-iOS-SDK/en/programming-guide/2_5/" title="Support for video advertising"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="/RFP-iOS-SDK/en/changelog/" title="CHANGELOG" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="/RFP-iOS-SDK/en/faq/" title="FAQ" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -746,3 +718,4 @@
 
   </body>
 </html>
+
