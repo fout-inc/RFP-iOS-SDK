@@ -1,0 +1,16 @@
+PODS:
+  - RFP-iOS-SDK (2.7.0)
+
+DEPENDENCIES:
+  - RFP-iOS-SDK
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - RFP-iOS-SDK
+
+SPEC CHECKSUMS:
+  RFP-iOS-SDK: 8e42b31baf5ef299b906bf2e646cf49b38d3582a
+
+PODFILE CHECKSUM: c697c4cdcab52f8db7e23559b3b09e838930cf5b
+
+COCOAPODS: 1.5.3
