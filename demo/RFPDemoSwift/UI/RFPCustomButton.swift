@@ -2,8 +2,8 @@
 //  RFPCustomButton.swift
 //  RFPDemoSwift
 //
-//  Created by FreakOut on 2018/07/27.
-//  Copyright © 2018年 FreakOut inc.,. All rights reserved.
+//  Created by FreakOut
+//  Copyright (c) 2018 FreakOut inc.,. All rights reserved.
 //
 
 import UIKit

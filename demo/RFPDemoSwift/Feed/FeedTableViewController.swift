@@ -2,8 +2,8 @@
 //  FeedTableViewController.swift
 //  RFPDemoSwift
 //
-//  Created by FreakOut on 2018/07/27.
-//  Copyright © 2018年 FreakOut inc.,. All rights reserved.
+//  Created by FreakOut
+//  Copyright (c) 2018 FreakOut inc.,. All rights reserved.
 //
 
 import UIKit
@@ -11,8 +11,9 @@ import UIKit
 class FeedTableViewController: UITableViewController
     , RFPInstreamAdLoaderDelegate
     , RFPExceptionDelegate
-    , RFPTableViewCellDelegate {
+    , RFPTableViewAdCellDelegate {
 
+    // elapsed time to track viewable imp
     let videoElapsed: Double = 2.0
     let imageElapsed: Double = 1.0
 
@@ -52,12 +53,12 @@ class FeedTableViewController: UITableViewController
         )
 
         tableView.register(
-            UINib(nibName: "RFPVideoCell", bundle: nil),
-            forCellReuseIdentifier: "VideoCell"
+            UINib(nibName: "RFPVideoAdCell", bundle: nil),
+            forCellReuseIdentifier: "VideoAdCell"
         )
         tableView.register(
-            UINib(nibName: "RFPImageCell", bundle: nil),
-            forCellReuseIdentifier: "ImageCell"
+            UINib(nibName: "RFPImageAdCell", bundle: nil),
+            forCellReuseIdentifier: "ImageAdCell"
         )
 
         topMargin = UIApplication.shared.statusBarFrame.size.height
@@ -113,8 +114,8 @@ class FeedTableViewController: UITableViewController
 
     func readyToPlay(with playerControl: RFPPlayerControl!) {
         playerControls.forEach { pc in
-            if (pc.value == playerControl) {
-                if let cell = self.tableView.cellForRow(at: pc.key) as? RFPVideoCell {
+            if pc.value == playerControl {
+                if let cell = self.tableView.cellForRow(at: pc.key) as? RFPVideoAdCell {
                     cell.setMargin(
                         top: topMargin,
                         bottom: bottomMargin
@@ -140,22 +141,26 @@ class FeedTableViewController: UITableViewController
         // cell
         let cell: UITableViewCell
 
-        if !isAdCellAt(indexPath) {
+        if !isAdCell(at: indexPath) {
             // contentCell
-            cell = createContentCell(contents: contents[indexPath.row], indexPath: indexPath)
+            return createContentCell(contents: contents[indexPath.row], indexPath: indexPath)
+        }
+
+        guard let item = contents[indexPath.row] as? RFPInstreamInfoModel else {
+            return UITableViewCell.init()
+        }
+
+        if item.isVideo() {
+            // videoCell
+            cell = createVideoAdCell(instreamInfoModel: item, indexPath: indexPath)
         } else {
-            let item: RFPInstreamInfoModel = contents[indexPath.row] as! RFPInstreamInfoModel
+            // imageCell
+            cell = createImageAdCell(instreamInfoModel: item, indexPath: indexPath)
+        }
 
-            if (item.isVideo()) {
-                // videoCell
-                cell = createVideoCell(instreamInfoModel: item, indexPath: indexPath)
-            } else {
-                // imageCell
-                cell = createImageCell(instreamInfoModel: item, indexPath: indexPath)
-            }
-
+        if let rfpCell = cell as? RFPTableViewAdCell {
             // viewable impression
-            (cell as! RFPTableViewCellProtocol).setTimerCompletion({ [weak self] indexPath in
+            rfpCell.setTimerCompletion({ [weak self] indexPath in
                 guard let `self` = self else {
                     return
                 }
@@ -168,14 +173,14 @@ class FeedTableViewController: UITableViewController
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // ad
-        if isAdCellAt(indexPath) {
+        if isAdCell(at: indexPath) {
             let item: RFPInstreamInfoModel = contents[indexPath.row] as! RFPInstreamInfoModel
             if item.isVideo() {
                 // videoCell
-                return RFPVideoCell.fixedHeight
+                return RFPVideoAdCell.fixedHeight
             }
             // imageCell
-            return RFPImageCell.fixedHeight
+            return RFPImageAdCell.fixedHeight
         }
         // contentCell
         return RFPContentCell.fixedHeight
@@ -187,9 +192,8 @@ class FeedTableViewController: UITableViewController
 
     // MARK: - Custom func
 
-    func isAdCellAt(_ indexPath: IndexPath) -> Bool {
+    func isAdCell(at indexPath: IndexPath) -> Bool {
         let item: AnyObject = contents[indexPath.row]
-
         if item is RFPInstreamInfoProtocol {
             return true
         }
@@ -198,9 +202,11 @@ class FeedTableViewController: UITableViewController
 
     func createContentCell(contents: AnyObject, indexPath: IndexPath) -> UITableViewCell {
         // cell
-        let cell = tableView.dequeueReusableCell(
+        guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "ContentCell",
-            for: indexPath) as! RFPContentCell
+            for: indexPath) as? RFPContentCell else {
+            return UITableViewCell.init()
+        }
 
         // image
         let imageName = String(describing: contents)
@@ -216,19 +222,38 @@ class FeedTableViewController: UITableViewController
         return cell
     }
 
-    func createVideoCell(instreamInfoModel: RFPInstreamInfoModel, indexPath: IndexPath) -> UITableViewCell {
+    func createVideoAdCell(instreamInfoModel: RFPInstreamInfoModel, indexPath: IndexPath) -> UITableViewCell {
         // cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! RFPVideoCell
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: "VideoAdCell",
+            for: indexPath) as? RFPVideoAdCell else {
+            return UITableViewCell.init()
+        }
 
         // layout
         cell.selectionStyle = .none
+        cell.clearPlayerControl()
         cell.layoutIfNeeded()
 
+        var pc: RFPPlayerControl
+        if let p = self.playerControls[indexPath] {
+            pc = p
+        } else {
+            if let p = adLoader.getVideoControl(
+                withFrame: cell.containerView.bounds,
+                infoModel: instreamInfoModel) {
+                self.playerControls[indexPath] = p
+                pc = p
+            } else {
+                return UITableViewCell.init()
+            }
+        }
+
         // settings
-        cell.model = instreamInfoModel
-        cell.indexPath = indexPath
-        cell.elapsed = self.videoElapsed
         cell.delegate = self
+        cell.indexPath = indexPath
+        cell.model = instreamInfoModel
+        cell.elapsed = self.videoElapsed
 
         // text
         cell.advertiser.text = instreamInfoModel.displayedAdvertiser
@@ -238,6 +263,8 @@ class FeedTableViewController: UITableViewController
         // button
         if let ctaTitle = instreamInfoModel.getCtaText() {
             cell.actionButton.setTitle(ctaTitle, for: .normal)
+        } else {
+            cell.actionButton.setTitle("- 詳細はこちら -", for: .normal)
         }
         cell.actionButton.addTarget(
             self,
@@ -245,29 +272,22 @@ class FeedTableViewController: UITableViewController
             for: .touchUpInside
         )
 
-        // player
-        if let pc = self.playerControls[indexPath] {
-            cell.clearPlayerControl()
-            cell.containerView.addSubview(pc)
-        } else {
-            if let playerControl: RFPPlayerControl? = adLoader.getVideoControl(
-                withFrame: cell.containerView.bounds,
-                infoModel: instreamInfoModel) {
+        // Set tap action - https://fout.github.io/RFP-iOS-SDK/programming-guide/2_5/#infeed/video/tapped
+        pc.setTapActionFullscreen()
 
-                // Set tap action - https://fout.github.io/RFP-iOS-SDK/programming-guide/2_5/#infeed/video/tapped
-                playerControl!.setTapActionFullscreen()
-
-                cell.containerView.addSubview(playerControl!)
-                self.playerControls[indexPath] = playerControl
-            }
-        }
+        cell.containerView.addSubview(pc)
+        cell.startTimer()
 
         return cell;
     }
 
-    func createImageCell(instreamInfoModel: RFPInstreamInfoModel, indexPath: IndexPath) -> UITableViewCell {
+    func createImageAdCell(instreamInfoModel: RFPInstreamInfoModel, indexPath: IndexPath) -> UITableViewCell {
         // cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! RFPImageCell
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: "ImageAdCell",
+            for: indexPath) as? RFPImageAdCell else {
+            return UITableViewCell.init()
+        }
 
         // layout
         cell.selectionStyle = .none
@@ -295,7 +315,7 @@ class FeedTableViewController: UITableViewController
         let imageView = UIImageView(frame: cell.containerView.bounds)
         imageView.contentMode = .scaleAspectFill
         instreamInfoModel.rfpLoadImage(imageView, completion: { (error: Error?) -> Void in
-            if (error != nil) {
+            if error != nil {
                 print("rfpLoadImage error", error!)
             } else {
                 cell.containerView.addSubview(imageView)
@@ -316,7 +336,7 @@ class FeedTableViewController: UITableViewController
                 return
             }
 
-            if let cell = superview as? RFPTableViewCell {
+            if let cell = superview as? RFPTableViewAdCell {
                 self.adLoader.rfpSendClickEvent(cell.model)
             } else {
                 recursiveSearch?(superview)

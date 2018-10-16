@@ -15,13 +15,13 @@
 		F94AFB232109A56E00530198 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94AFB212109A56E00530198 /* LaunchScreen.storyboard */; };
 		F9589166210AC90700937488 /* RFPCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9589165210AC90700937488 /* RFPCustomButton.swift */; };
 		F9589168210AD1F500937488 /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9589167210AD1F500937488 /* FeedTableViewController.swift */; };
-		F958916E210AE1BA00937488 /* RFPImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F958916C210AE1BA00937488 /* RFPImageCell.swift */; };
-		F958916F210AE1BA00937488 /* RFPImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F958916D210AE1BA00937488 /* RFPImageCell.xib */; };
-		F9589172210AE1D400937488 /* RFPVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9589170210AE1D400937488 /* RFPVideoCell.swift */; };
-		F9589173210AE1D400937488 /* RFPVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9589171210AE1D400937488 /* RFPVideoCell.xib */; };
+		F958916E210AE1BA00937488 /* RFPImageAdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F958916C210AE1BA00937488 /* RFPImageAdCell.swift */; };
+		F958916F210AE1BA00937488 /* RFPImageAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F958916D210AE1BA00937488 /* RFPImageAdCell.xib */; };
+		F9589172210AE1D400937488 /* RFPVideoAdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9589170210AE1D400937488 /* RFPVideoAdCell.swift */; };
+		F9589173210AE1D400937488 /* RFPVideoAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9589171210AE1D400937488 /* RFPVideoAdCell.xib */; };
 		F959F56E2112ADE700D8F6C3 /* RFPContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F959F56C2112ADE700D8F6C3 /* RFPContentCell.swift */; };
 		F959F56F2112ADE700D8F6C3 /* RFPContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F959F56D2112ADE700D8F6C3 /* RFPContentCell.xib */; };
-		F968D6EB2111840800EAD84A /* RFPTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F968D6EA2111840800EAD84A /* RFPTableViewCell.swift */; };
+		F968D6EB2111840800EAD84A /* RFPTableViewAdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F968D6EA2111840800EAD84A /* RFPTableViewAdCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,13 +38,13 @@
 		F9589165210AC90700937488 /* RFPCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFPCustomButton.swift; sourceTree = "<group>"; };
 		F9589167210AD1F500937488 /* FeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		F9589169210AD2CD00937488 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		F958916C210AE1BA00937488 /* RFPImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFPImageCell.swift; sourceTree = "<group>"; };
-		F958916D210AE1BA00937488 /* RFPImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RFPImageCell.xib; sourceTree = "<group>"; };
-		F9589170210AE1D400937488 /* RFPVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFPVideoCell.swift; sourceTree = "<group>"; };
-		F9589171210AE1D400937488 /* RFPVideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RFPVideoCell.xib; sourceTree = "<group>"; };
+		F958916C210AE1BA00937488 /* RFPImageAdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFPImageAdCell.swift; sourceTree = "<group>"; };
+		F958916D210AE1BA00937488 /* RFPImageAdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RFPImageAdCell.xib; sourceTree = "<group>"; };
+		F9589170210AE1D400937488 /* RFPVideoAdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFPVideoAdCell.swift; sourceTree = "<group>"; };
+		F9589171210AE1D400937488 /* RFPVideoAdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RFPVideoAdCell.xib; sourceTree = "<group>"; };
 		F959F56C2112ADE700D8F6C3 /* RFPContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFPContentCell.swift; sourceTree = "<group>"; };
 		F959F56D2112ADE700D8F6C3 /* RFPContentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RFPContentCell.xib; sourceTree = "<group>"; };
-		F968D6EA2111840800EAD84A /* RFPTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFPTableViewCell.swift; sourceTree = "<group>"; };
+		F968D6EA2111840800EAD84A /* RFPTableViewAdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFPTableViewAdCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,11 +122,11 @@
 			isa = PBXGroup;
 			children = (
 				F9589165210AC90700937488 /* RFPCustomButton.swift */,
-				F958916C210AE1BA00937488 /* RFPImageCell.swift */,
-				F958916D210AE1BA00937488 /* RFPImageCell.xib */,
-				F9589170210AE1D400937488 /* RFPVideoCell.swift */,
-				F9589171210AE1D400937488 /* RFPVideoCell.xib */,
-				F968D6EA2111840800EAD84A /* RFPTableViewCell.swift */,
+				F958916C210AE1BA00937488 /* RFPImageAdCell.swift */,
+				F958916D210AE1BA00937488 /* RFPImageAdCell.xib */,
+				F9589170210AE1D400937488 /* RFPVideoAdCell.swift */,
+				F9589171210AE1D400937488 /* RFPVideoAdCell.xib */,
+				F968D6EA2111840800EAD84A /* RFPTableViewAdCell.swift */,
 				F959F56C2112ADE700D8F6C3 /* RFPContentCell.swift */,
 				F959F56D2112ADE700D8F6C3 /* RFPContentCell.xib */,
 			);
@@ -193,8 +193,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F959F56F2112ADE700D8F6C3 /* RFPContentCell.xib in Resources */,
-				F9589173210AE1D400937488 /* RFPVideoCell.xib in Resources */,
-				F958916F210AE1BA00937488 /* RFPImageCell.xib in Resources */,
+				F9589173210AE1D400937488 /* RFPVideoAdCell.xib in Resources */,
+				F958916F210AE1BA00937488 /* RFPImageAdCell.xib in Resources */,
 				F94AFB232109A56E00530198 /* LaunchScreen.storyboard in Resources */,
 				F94AFB202109A56E00530198 /* Assets.xcassets in Resources */,
 				F94AFB1E2109A56B00530198 /* Main.storyboard in Resources */,
@@ -230,11 +230,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F94AFB1B2109A56B00530198 /* ViewController.swift in Sources */,
-				F968D6EB2111840800EAD84A /* RFPTableViewCell.swift in Sources */,
+				F968D6EB2111840800EAD84A /* RFPTableViewAdCell.swift in Sources */,
 				F959F56E2112ADE700D8F6C3 /* RFPContentCell.swift in Sources */,
 				F9589166210AC90700937488 /* RFPCustomButton.swift in Sources */,
-				F9589172210AE1D400937488 /* RFPVideoCell.swift in Sources */,
-				F958916E210AE1BA00937488 /* RFPImageCell.swift in Sources */,
+				F9589172210AE1D400937488 /* RFPVideoAdCell.swift in Sources */,
+				F958916E210AE1BA00937488 /* RFPImageAdCell.swift in Sources */,
 				F94AFB192109A56B00530198 /* AppDelegate.swift in Sources */,
 				F9589168210AD1F500937488 /* FeedTableViewController.swift in Sources */,
 			);
@@ -382,7 +382,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2VEY8J7784;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = RFPDemoSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -403,7 +403,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2VEY8J7784;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = RFPDemoSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
