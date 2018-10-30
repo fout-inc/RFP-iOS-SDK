@@ -17,7 +17,7 @@ Install with Carthage by adding the following to your Cartfile:
 
 
 ```
-binary "https://raw.githubusercontent.com/fout/RFP-iOS-SDK/master/RFP-iOS-SDK-Carthage.json" 
+binary "https://raw.githubusercontent.com/fout/RFP-iOS-SDK/master/RFP-iOS-SDK.json" 
 ```
 
 Run `carthage update `to build the framework and link against `RFP.framework`.
