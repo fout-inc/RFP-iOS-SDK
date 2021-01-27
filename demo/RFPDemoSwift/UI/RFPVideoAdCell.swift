@@ -17,7 +17,7 @@ class RFPVideoAdCell: RFPTableViewAdCell {
 
     @IBOutlet weak var containerView: UIView!
 
-    open static let fixedHeight: CGFloat = 320
+    public static let fixedHeight: CGFloat = 320
 
     enum PlayerStatus: Int {
         case ready
@@ -62,32 +62,14 @@ class RFPVideoAdCell: RFPTableViewAdCell {
                     to: tableView.superview!
                 )
 
-                // check viewability
                 if self.viewableRect.intersects(cellRect) {
-                    // viewable
                     if self.playerStatus == .ready {
                         self.playerStatus = .played
                         if let player = self.delegate!.getPlayer(self.indexPath!) {
                             player.play()
                         }
                     }
-                    if self.startTime == 0 {
-                        // start timer
-                        self.startTime = Date().timeIntervalSince1970
-                    } else {
-                        if self.elapsed <= (Date().timeIntervalSince1970 - self.startTime) {
-                            // time has come
-                            if self.completion != nil {
-                                self.completion!(self.indexPath!)
-                                self.startTime = Double.infinity
-                            }
-                        }
-                    }
                 } else {
-                    // unviewable
-                    if self.startTime != Double.infinity {
-                        self.startTime = 0
-                    }
                     if self.playerStatus == .played {
                         self.playerStatus = .ready
                         if let player = self.delegate!.getPlayer(self.indexPath!) {

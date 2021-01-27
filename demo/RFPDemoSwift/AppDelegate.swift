@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         //==============================
         // RFP Settings
@@ -24,9 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Set http timeout(default: 15sec)
         //RFP.rfpSetHttpRequestTimeoutInterval(10.0);
-
-        // Init media
-        RFP.rfpInitMedia("3")
 
         return true
     }
